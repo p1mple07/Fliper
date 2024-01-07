@@ -1,0 +1,90 @@
+/* Dark Theme */
+
+body {
+    background-color: #1f1f1f;
+    color: #ffffff; /* Text color */
+  }
+  
+  .mainContainer {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  /* Dark theme for title */
+  .titleContainer {
+    display: flex;
+    flex-direction: column;
+    font-size: 64px;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+    color: #ffcc00; /* Title color */
+  }
+  
+  /* Dark theme for result and history items */
+  .resultContainer,
+  .historyItem {
+    flex-direction: row;
+    display: flex;
+    width: 400px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333333; /* Background color for result and history items */
+    color: #ffffff; /* Text color for result and history items */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  
+  /* Dark theme for history container */
+  .historyContainer {
+    flex-direction: column;
+    display: flex;
+    height: 200px;
+    align-items: center;
+    flex-grow: 5;
+    justify-content: flex-start;
+    background-color: #292929; /* Background color for history container */
+    padding: 10px;
+    border-radius: 8px;
+    overflow-y: auto; /* Enable scrollbar for overflow */
+  }
+  
+  /* Dark theme for button container */
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 260px;
+  }
+  
+  /* Dark theme for input container */
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  /* Dark theme for error label */
+  .inputContainer > .errorLabel {
+    color: #ff5555; /* Error label color */
+    font-size: 12px;
+  }
+  
+  /* Dark theme for input box */
+  .inputBox {
+    height: 48px;
+    width: 400px;
+    font-size: large;
+    border-radius: 8px;
+    border: 1px solid #666666; /* Border color */
+    padding-left: 8px;
+    background-color: #333333; /* Input box background color */
+    color: #ffffff; /* Input text color */
+  }
+  
