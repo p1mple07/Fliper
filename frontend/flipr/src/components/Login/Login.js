@@ -3,12 +3,17 @@ import './Login.css'
 import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
 
+import { Link, Redirect } from 'react-router-dom'
+
 const Signup = (props) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [usernameError, setUsernameError] = useState("")
     const [passwordError, setPasswordError] = useState("")
     const [signIn,setSignIn] = useState(false)
+    const [pwinc, setPwInc] = useState(false)
+    const [usernotexist, setUserNotExist] = useState(false)
+    
     // const navigate = useNavigate();
     
     // const navigate = useNavigate();
@@ -22,31 +27,57 @@ const Signup = (props) => {
         console.log('Username:', username);
         console.log('Password:', password);
         e.preventDefault();
+        setPwInc(false);
+        setUserNotExist(false);
 
         try {
-            // Make a POST request using axios
-            // const response = await axios.post('http://localhost:5000/login', {username: username, password: password});
             const response = await axios.post('http://localhost:5000/login', { username, password }, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            // Handle the response as needed
+        
+            // Handle the successful response
             console.log('Response:', response.data);
-            setSignIn(true)
+            setSignIn(true);
             // navigate('/');
         } catch (error) {
-            // Handle errors
-            console.error('Error:', error.response ? error.response.data : error.message);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.error('Response error:', error.response.data);
+                console.error('Status code:', error.response.status);
+        
+                if (error.response.status === 401) {
+                    // Handle incorrect password
+                    console.error('Password is incorrect');
+                    setPwInc(true);
+                } else if (error.response.status === 409) {
+                    // Handle username not found
+                    console.error('Username does not exist');
+                    setUserNotExist(true);
+                } else {
+                    // Handle other response errors
+                    console.error('Other response error');
+                }
+            } else {
+                // The request was made but no response was received
+                // or there was a network error
+                console.error('Request error:', error.message);
+            }
         }
     };
 
     return <div className={"mainContainer"}>
-        {signIn&&<div className={"titleContainer"}>
-            <div>Successfully signed in</div>
+        {signIn && <Redirect to="/home" />}
+        {pwinc&&<div className={"error"}>
+            <div>Password is incorrect.</div>
+        </div>}
+        {usernotexist&&<div className={"error"}>
+            <div>This username does not exist. Please signup first.</div>
         </div>}
         <div className={"titleContainer"}>
-            <div>Sign Up</div>
+            <div>Login</div>
         </div>
         <br />
         <div className={"inputContainer"}>
@@ -67,13 +98,25 @@ const Signup = (props) => {
             <label className="errorLabel">{passwordError}</label>
         </div>
         <br />
-        <div className={"inputContainer"}>
-            <input
-                className={"inputButton"}
-                type="button"
-                onClick={onButtonClick}
-                value={"Register"} />
+        <div className="buttonContainer">
+            <div className={"inputContainer"}>
+                <input
+                    className={"inputButton"}
+                    type="button"
+                    onClick={onButtonClick}
+                    value={"Login"} />
+                    <Link to="/signup" className="inputButton" >Signup</Link>
+            </div>
         </div>
+        {/* <div className="inputContainer">
+            <Link to="/signup" className="inputButton" >Signup</Link>
+            {/* <input
+            className="inputButton"
+            type="button"
+            onClick={onButtonClick2}
+            value="Login"
+            /> */} 
+        {/* </div> */}
     </div>
 }
 

@@ -56,10 +56,10 @@ body {
   /* Dark theme for button container */
   .buttonContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 260px;
+    height: 100px;
   }
   
   /* Dark theme for input container */
@@ -88,3 +88,30 @@ body {
     color: #ffffff; /* Input text color */
   }
   
+  .inputButton {
+    height: 48px;
+    width: 200px;
+    font-size: large;
+    border-radius: 8px;
+    border: 1px solid #666666; /* Border color */
+    background-color: #444444; /* Button background color */
+    color: #ffffff; /* Button text color */
+    cursor: pointer;
+    margin: 5px; /* Adjust spacing between buttons */
+    display: inline-flex; /* Display as inline-flex for Link to act like a button */
+      justify-content: center; /* Center content horizontally */
+      align-items: center; /* Center content vertically */
+      text-decoration: none; /* Remove default link underline */
+  }
+  
+  .inputButton:hover {
+    background-color: #555555; /* Button background color on hover */
+  }
+
+  .error {
+    /* background-color: #4CAF50; Green background color */
+    color: #ff0808; /* Dark green text color */
+    padding: 10px; /* Padding around the content */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px; /* Adjust spacing from top */
+  }
