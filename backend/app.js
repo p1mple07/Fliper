@@ -8,8 +8,8 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(express.json());
-const server = http.createServer(app);
-const io = socketIo(server, { path: '/message' });
+// const server = http.createServer(app);
+// const io = socketIo(server, { path: '/message' });
 
 
 const dburi = 'mongodb+srv://shobyy:siangsters@cluster0.3ipmwxk.mongodb.net/website?retryWrites=true&w=majority';
