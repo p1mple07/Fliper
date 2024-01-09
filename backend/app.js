@@ -2,11 +2,14 @@ const express  = require('express')
 const mongoose = require('mongoose')
 const Password = require('./models/password')
 const bcrypt = require('bcrypt');
+const socket = require('socket.io');
 const saltRounds = 10; // Adjust the number of salt rounds based on your security requirements
 const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(express.json());
+const server = http.createServer(app);
+const io = socketIo(server, { path: '/message' });
 
 
 const dburi = 'mongodb+srv://shobyy:siangsters@cluster0.3ipmwxk.mongodb.net/website?retryWrites=true&w=majority';
@@ -19,18 +22,16 @@ mongoose.connect(dburi)
         console.log(err);
     })
 
-app.get('/login',(req,res) =>{
-    const user =  new Password({
-        username : 'shashwat',
-        hash_pass : 'test'
-    })
-    user.save()
-     .then((result)=>{
-        res.send(result)
-     })
-     .catch((err)=>{
-        console.log(err);
-     });
+app.get('/message',async (req,res) =>{
+    try {
+        // Query MongoDB to get all usernames
+        const usernames = await Password.find({}, 'username');
+        const usernameArray = usernames.map(user => user.username);
+        res.json(usernameArray);
+    } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 })
 app.use(express.urlencoded({extended:true}))
 
