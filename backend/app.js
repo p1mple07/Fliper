@@ -66,3 +66,31 @@ app.post('/signUp', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
+
+app.post('/login', async (req, res) => {
+    
+    const data = req.body;
+    console.log(data);
+    try {
+        // Check if the user already exists
+        const existingUser = await Password.findOne({ username: data.username }).exec();
+
+        if (existingUser !== null) {
+            // Hash the password
+            const passwordMatch = await bcrypt.compare(data.password, existingUser.hash_pass);
+
+            if (passwordMatch) {
+                res.status(200).json({ message: 'User Login successful', user: existingUser });
+            } else {
+                res.status(401).json({ message: 'Password is incorrect' });
+            }
+
+        } else {
+            res.status(409).json({ message: 'Username does not exist' });
+        }
+    } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
