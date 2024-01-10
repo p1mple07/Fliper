@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import { Link, Redirect } from 'react-router-dom'
 
-const Signup = (props) => {
+const Login = ({usernamelogin}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [usernameError, setUsernameError] = useState("")
@@ -13,6 +13,8 @@ const Signup = (props) => {
     const [signIn,setSignIn] = useState(false)
     const [pwinc, setPwInc] = useState(false)
     const [usernotexist, setUserNotExist] = useState(false)
+
+
     
     // const navigate = useNavigate();
     
@@ -29,6 +31,7 @@ const Signup = (props) => {
         e.preventDefault();
         setPwInc(false);
         setUserNotExist(false);
+        
 
         try {
             const response = await axios.post('http://localhost:5000/login', { username, password }, {
@@ -40,6 +43,7 @@ const Signup = (props) => {
             // Handle the successful response
             console.log('Response:', response.data);
             setSignIn(true);
+            usernamelogin(username);
             // navigate('/');
         } catch (error) {
             if (error.response) {
@@ -101,15 +105,15 @@ const Signup = (props) => {
         <div className="buttonContainer">
             <div className={"inputContainer"}>
                 <input
-                    className={"inputButton"}
-                    type="button"
-                    onClick={onButtonClick}
-                    value={"Login"} />
-                    <Link to="/signup" className="inputButton" >Signup</Link>
+                className={"inputButton"}
+                type="button"
+                onClick={onButtonClick}
+                value={"Login"} />
+                <Link to="/signup" className="inputButton" >Singup</Link>
             </div>
         </div>
         {/* <div className="inputContainer">
-            <Link to="/signup" className="inputButton" >Signup</Link>
+            <Link to="/signup" className="inputButton" >Singup</Link>
             {/* <input
             className="inputButton"
             type="button"
@@ -120,4 +124,4 @@ const Signup = (props) => {
     </div>
 }
 
-export default Signup
+export default Login

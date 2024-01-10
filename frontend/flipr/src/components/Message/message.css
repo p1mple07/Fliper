@@ -1,0 +1,28 @@
+/* CSS */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px; /* Set a max height for vertical scrolling */
+    /* overflow-y: auto; Enable vertical scrolling */
+  }
+  
+  .chatuser {
+    margin-bottom: 8px; /* Add space between each button */
+  }
+  
+  .chatuser button {
+    display: block;
+    width: 25%;
+    padding: 16px; /* Increase padding for larger buttons */
+    text-align: center;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 8px; /* Adjust border radius for rounded corners */
+    cursor: pointer;
+    font-size: 18px; /* Adjust font size */
+  }
+  
+  .chatuser button:hover {
+    background-color: #e0e0e0;
+  }
+  
